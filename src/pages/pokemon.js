@@ -22,6 +22,37 @@ const Image = ({ url }) => {
   );
 };
 
+const convertName = async (name) => {
+  const s = new String(name);
+  name = s.slice(0, 1).toUpperCase() + s.slice(1);
+  const response = await fetch(
+    "https://gist.githubusercontent.com/PonDad/93922f63c3143489e30c3716d3d176d2/raw/0ea137397f9701828ecd7da7d253168678646488/pokemon.json"
+  );
+  const data = await response.json();
+  data.map((input) => {
+    if (input.en === name) {
+      name = input.ja;
+    }
+  });
+  return name;
+};
+
+const Name = ({ name }) => {
+  const [japaName, setJapaName] = useState(null);
+  useEffect(() => {
+    convertName(name).then((japaName) => {
+      setJapaName(japaName);
+    });
+  });
+  //console.log(japaName);
+
+  return (
+    <div>
+      <h1>{japaName}</h1>
+    </div>
+  );
+};
+
 const Content = ({ data }) => {
   if (data == null) {
     return (
@@ -33,10 +64,13 @@ const Content = ({ data }) => {
 
   const URL = data.forms[0].url;
   const t = data.types;
+  // const japaName = convertName(data.name);
+  //console.log(japaName);
   return (
     <div>
       <Image url={URL} />
-      <h1>{data.name}</h1>
+      <Name name={data.name} />
+      {/*} <h1>{data.name}</h1>*/}
       <p>
         type ...&emsp;
         {t.map((input) => input.type.name + "  ")}
