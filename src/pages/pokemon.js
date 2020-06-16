@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import en2jaType from "./type.json";
 
 const getImageUrl = async (url) => {
   const response = await fetch(url);
@@ -14,7 +15,6 @@ const Image = ({ url }) => {
       setImg(img);
     });
   });
-
   return (
     <figure className="image">
       <img src={img} style={{ width: "50%" }} />
@@ -44,11 +44,30 @@ const Name = ({ name }) => {
       setJapaName(japaName);
     });
   });
-  //console.log(japaName);
-
   return (
     <div>
       <h1>{japaName}</h1>
+    </div>
+  );
+};
+
+const convertType = (type) => {
+  console.log(type);
+  en2jaType.map((input) => {
+    if (input.en == type) {
+      type = input.ja;
+    }
+  });
+  return type; //<div>{type}hello</div>;
+};
+
+const Type = ({ types }) => {
+  return (
+    <div>
+      <h1>
+        タイプ：
+        {types.map((input) => convertType(input.type.name) + " ")}
+      </h1>
     </div>
   );
 };
@@ -64,17 +83,12 @@ const Content = ({ data }) => {
 
   const URL = data.forms[0].url;
   const t = data.types;
-  // const japaName = convertName(data.name);
-  //console.log(japaName);
   return (
     <div>
       <Image url={URL} />
       <Name name={data.name} />
-      {/*} <h1>{data.name}</h1>*/}
-      <p>
-        type ...&emsp;
-        {t.map((input) => input.type.name + "  ")}
-      </p>
+      <Type types={data.types} />
+      {/*} <p>{t.map((input) => Type(input.type.name))}</p>*/}
     </div>
   );
 };

@@ -1,0 +1,20 @@
+[
+  { "ja": "ノーマル", "en": "normal" },
+  { "ja": "ほのお", "en": "fire" },
+  { "ja": "みず", "en": "water" },
+  { "ja": "くさ", "en": "grass" },
+  { "ja": "でんき", "en": "electric" },
+  { "ja": "こおり", "en": "ice" },
+  { "ja": "かくとう", "en": "fighting" },
+  { "ja": "どく", "en": "poison" },
+  { "ja": "じめん", "en": "ground" },
+  { "ja": "ひこう", "en": "flying" },
+  { "ja": "エスパー", "en": "psychic" },
+  { "ja": "むし", "en": "bug" },
+  { "ja": "いわ", "en": "rock" },
+  { "ja": "ゴースト", "en": "ghost" },
+  { "ja": "ドラゴン", "en": "dragon" },
+  { "ja": "あく", "en": "dark" },
+  { "ja": "はがね", "en": "steel" },
+  { "ja": "フェアリー", "en": "fairy" }
+]
