@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import en2jaType from "./type.json";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-const getImageUrl = async (url) => {
+export const getImageUrl = async (url) => {
   const response = await fetch(url);
   const data = await response.json();
   const imgUrl = data.sprites.front_default;
   return imgUrl;
 };
 
-const Image = ({ url }) => {
+export const Image = ({ url }) => {
   const [img, setImg] = useState(null);
   useEffect(() => {
     getImageUrl(url).then((img) => {
@@ -22,7 +23,7 @@ const Image = ({ url }) => {
   );
 };
 
-const convertName = async (name) => {
+export const convertName = async (name) => {
   const s = new String(name);
   name = s.slice(0, 1).toUpperCase() + s.slice(1);
   const response = await fetch(
@@ -37,7 +38,7 @@ const convertName = async (name) => {
   return name;
 };
 
-const Name = ({ name }) => {
+export const Name = ({ name }) => {
   const [japaName, setJapaName] = useState(null);
   useEffect(() => {
     convertName(name).then((japaName) => {
@@ -51,8 +52,8 @@ const Name = ({ name }) => {
   );
 };
 
-const convertType = (type) => {
-  console.log(type);
+export const convertType = (type) => {
+  //console.log(type);
   en2jaType.map((input) => {
     if (input.en == type) {
       type = input.ja;
@@ -61,7 +62,7 @@ const convertType = (type) => {
   return type; //<div>{type}hello</div>;
 };
 
-const Type = ({ types }) => {
+export const Type = ({ types }) => {
   return (
     <div>
       <h1>
@@ -104,15 +105,18 @@ const Pokemon = ({ id }) => {
   }, []);
 
   return (
-    <div>
-      <section className="hero">
-        <div className="hero-body">
-          <div className="container">
-            <Content data={data} />
+    <Link to={`/pokemon_detaile/${id}`}>
+      <div>
+        <section className="hero">
+          <div className="hero-body">
+            <div className="container">
+              <Content data={data} />
+              {/*console.log(data)*/}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </Link>
   );
 };
 
