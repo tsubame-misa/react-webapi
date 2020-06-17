@@ -88,7 +88,7 @@ const Content = ({ data }) => {
     <div>
       <Image url={URL} />
       <Name name={data.name} />
-      <Type types={data.types} />
+      {/*} <Type types={data.types} />/*/}
       {/*} <p>{t.map((input) => Type(input.type.name))}</p>*/}
     </div>
   );
